@@ -14,8 +14,8 @@ import static java.util.Comparator.comparing;
 public class Population {
 
     private Integer populationSize;
+    private Individual bestIndividual;
     private Integer generation = null;
-    private Individual bestIndividual = null;
     private List<Individual> individuals = new ArrayList<>();
 
     public Population(Integer populationSize) {
@@ -25,6 +25,7 @@ public class Population {
     public void initialize(List<Product> products, Double sizeLimit){
         generatePopulation(products, sizeLimit);
         sortIndividualsByFitness();
+        this.bestIndividual = individuals.get(0);
     }
 
     private void generatePopulation(List<Product> products, Double sizeLimit) {
@@ -32,6 +33,6 @@ public class Population {
     }
 
     private void sortIndividualsByFitness(){
-        this.individuals.sort(comparing(Individual::getFitness));
+        this.individuals.sort(comparing(Individual::getFitness).reversed());
     }
 }
