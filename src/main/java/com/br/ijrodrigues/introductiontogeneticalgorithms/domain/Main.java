@@ -14,5 +14,6 @@ public class Main {
         population.initialize(products, 3.0);
 
         log.info("best solution found: {}", population.getBestIndividual());
+        log.info("best solution found: {}", population.getPopulationFitness());
     }
 }

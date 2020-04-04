@@ -28,6 +28,13 @@ public class Population {
         this.bestIndividual = individuals.get(0);
     }
 
+    public Double getPopulationFitness(){
+        return this.individuals.stream()
+                .map(Individual::getFitness)
+                .reduce((accumulator, individualFitnees) -> accumulator += individualFitnees)
+                .orElse(0.0);
+    }
+
     private void generatePopulation(List<Product> products, Double sizeLimit) {
         IntStream.range(0, populationSize).forEach(value -> individuals.add(new Individual(products, sizeLimit)));
     }
