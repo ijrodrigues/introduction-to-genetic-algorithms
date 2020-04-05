@@ -13,7 +13,7 @@ public class Main {
         Population population = new Population(100);
         population.initialize(products, 3.0);
 
-        log.info("best solution found: {}", population.getBestIndividual());
-        log.info("best solution found: {}", population.getPopulationFitness());
+
+        log.info("pai bom: {}", population.selectParent());
     }
 }

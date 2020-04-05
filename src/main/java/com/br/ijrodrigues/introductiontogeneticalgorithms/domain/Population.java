@@ -28,11 +28,23 @@ public class Population {
         this.bestIndividual = individuals.get(0);
     }
 
-    public Double getPopulationFitness(){
+    private Double getPopulationFitness(){
         return this.individuals.stream()
                 .map(Individual::getFitness)
                 .reduce((accumulator, individualFitnees) -> accumulator += individualFitnees)
                 .orElse(0.0);
+    }
+
+    public Individual selectParent(){
+        Double sortedValue = Math.random() * getPopulationFitness();
+        Double sum = 0.0;
+        int position = 0;
+
+        while (position < individuals.size() && sum < sortedValue){
+            sum += individuals.get(position).getFitness();
+            position += 1;
+        }
+        return individuals.get(position - 1);
     }
 
     private void generatePopulation(List<Product> products, Double sizeLimit) {
