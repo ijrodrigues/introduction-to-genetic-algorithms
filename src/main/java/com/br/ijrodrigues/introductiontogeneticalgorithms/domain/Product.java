@@ -3,9 +3,11 @@ package com.br.ijrodrigues.introductiontogeneticalgorithms.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 
+@Slf4j
 @Getter
 @ToString
 @AllArgsConstructor
@@ -31,6 +33,16 @@ public class Product {
         products.add(new Product("Fan General Eletrics", 0.496, 199.90));
         products.add(new Product("Fan Consul", 0.396, 159.90));
         products.add(new Product("Nike Shocks", 0.196, 359.90));
+        return products;
+    }
+
+    public static ArrayList<Product> getFiveProducts() {
+        ArrayList<Product> products = new ArrayList<>();
+        products.add(new Product("Fridge Dako", 0.751, 999.90));
+        products.add(new Product("Iphone 6", 0.000089, 2911.12));
+        products.add(new Product("TV 55", 0.400, 4346.99));
+        products.add(new Product("TV 50", 0.290, 3999.90));
+        products.add(new Product("TV 42", 0.200, 2999.00));
         return products;
     }
 }

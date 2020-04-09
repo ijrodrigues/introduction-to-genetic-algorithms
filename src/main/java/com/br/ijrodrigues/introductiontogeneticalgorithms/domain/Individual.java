@@ -58,15 +58,12 @@ public class Individual {
 
     public List<Individual> crossover(Individual other) {
         int cutPath = (int) Math.round(Math.random() * this.genes.size());
-        log.info("Cortado em: " + cutPath);
         return asList(
                 generateNewIndividual(this, other, cutPath),
                 generateNewIndividual(other, this, cutPath));
     }
 
     public Individual mutate(Integer probability) {
-        log.info("genes antes da mutação " + this.genes.toString());
-
         for (int x = 0; x < this.genes.size(); x++) {
             if (Math.random() < (probability.doubleValue() / 100)) {
                 if (this.genes.get(x).equals(true)) {
@@ -76,9 +73,6 @@ public class Individual {
                 }
             }
         }
-
-        log.info("genes depois da mutação " + this.genes.toString());
-
         return this;
     }
 
@@ -111,7 +105,7 @@ public class Individual {
     @Override
     public String toString() {
         return "Individual{" +
-                ", genes=" + genes +
+                " genes=" + genes +
                 ", sizeLimit=" + sizeLimit +
                 ", usedSpace=" + usedSpace +
                 ", fitness=" + fitness +
