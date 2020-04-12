@@ -1,9 +1,11 @@
 package com.br.ijrodrigues.introductiontogeneticalgorithms.domain;
 
+import com.br.ijrodrigues.introductiontogeneticalgorithms.infrastructure.Graphic;
 import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static java.util.Comparator.comparing;
@@ -14,6 +16,7 @@ public class Population {
     private Integer populationSize;
     private Integer generation;
     private Individual bestIndividualEver;
+    private List<Individual> bestIndividuals = new ArrayList<>();
     private List<Individual> individuals = new ArrayList<>();
 
     public Population(Integer populationSize, List<Product> products, Double sizeLimit) {
@@ -52,10 +55,11 @@ public class Population {
         sortIndividualsByFitness();
         this.generation += 1;
 
-        if (this.individuals.get(0).getFitness() > this.bestIndividualEver.getFitness()) {
+        Individual bestIndividual = this.individuals.get(0);
+        if (bestIndividual.getFitness() > this.bestIndividualEver.getFitness()) {
             this.bestIndividualEver = individuals.get(0);
         }
-
+        this.bestIndividuals.add(bestIndividual);
         printPopulationDetails();
     }
 
@@ -91,6 +95,16 @@ public class Population {
 
     private void generatePopulation(List<Product> products, Double sizeLimit) {
         IntStream.range(0, populationSize).forEach(value -> individuals.add(new Individual(products, sizeLimit)));
+    }
+
+    public void displayResults() {
+        List<Double> data = this.getBestIndividuals().stream()
+                .map(Individual::getFitness)
+                .collect(Collectors.toList());
+
+        Graphic graphic = new Graphic("Generic Algorithm", data, "Generation", "Fitness");
+        graphic.pack();
+        graphic.setVisible(true);
     }
 
     private void sortIndividualsByFitness() {
